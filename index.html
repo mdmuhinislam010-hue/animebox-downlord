@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anime Box — App Download</title>
+<style>
+:root{--bg:#0f1115;--surface:#191d24;--surface2:#222833;--text:#f5f7fa;--muted:#a5afbd;--line:#303845;--green:#ffd400;--yellow:#ffd400;--blue:#8ab4f8}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 88% 18%,#ffd40055 0%,#ffd4002b 13%,#ffd40010 27%,transparent 43%),radial-gradient(ellipse at 12% 82%,#ffbf002b 0%,transparent 34%),linear-gradient(115deg,#0f1115 0%,#0f1115 70%,#292300 100%);background-attachment:fixed;color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+.topbar{height:64px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:13px;padding:0 max(18px,calc((100% - 1000px)/2));position:sticky;top:0;background:#0f1115ed;backdrop-filter:blur(12px);z-index:2}
+.logo{font-weight:850;font-size:21px;letter-spacing:-.7px}.logo span{color:var(--yellow);text-shadow:0 0 12px #ffd40066}.search{margin-left:auto;background:var(--surface2);border-radius:13px;padding:9px 13px;color:var(--muted);font-size:13px}
+main{max-width:1000px;margin:auto;padding:28px 22px 60px}.crumb{color:var(--muted);font-size:13px;margin-bottom:22px}.crumb span{color:var(--yellow)}
+.appHead{display:flex;gap:22px;align-items:center}.appIcon{width:116px;height:116px;flex:0 0 116px;border-radius:26px;display:block;object-fit:cover;background:linear-gradient(145deg,#493b08,#1e3039);font-size:54px;border:1px solid #8a7415;box-shadow:0 0 22px #ffd40033,0 10px 35px #0004}.appName{font-size:clamp(27px,5vw,39px);line-height:1.12;letter-spacing:-1px;margin:0 0 7px}.dev{color:var(--yellow);font-size:15px;font-weight:650}.verified{display:inline-flex;align-items:center;gap:4px;color:var(--yellow);font-size:12px;margin-top:7px}.headMeta{color:var(--muted);font-size:13px;margin-top:10px}
+.installRow{display:flex;gap:10px;margin:25px 0 23px}.install{flex:1;border:0;border-radius:12px;background:var(--yellow);color:#241d00;box-shadow:0 0 18px #ffd40033;padding:13px 16px;font-size:15px;font-weight:800;cursor:pointer}.share{border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text);padding:0 18px;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid #ffd40033;background:var(--surface);box-shadow:0 0 22px #ffd4000c;border-radius:16px;padding:17px 8px;margin-bottom:30px}.stat{text-align:center;padding:0 7px;border-right:1px solid var(--line)}.stat:last-child{border:0}.stat strong{display:block;font-size:16px}.stat span{font-size:11px;color:var(--muted);display:block;margin-top:4px}
+.section{margin-top:29px}.section h2{font-size:20px;margin:0 0 13px;letter-spacing:-.3px}.sub{color:var(--muted);font-size:13px;margin:-6px 0 15px}
+.screens{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;overflow:hidden}.screenImage{display:block;width:100%;height:auto;max-height:430px;object-fit:cover;object-position:top;border:1px solid var(--line);border-radius:16px;background:var(--surface)}.shot{min-height:165px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(150deg,#273b48,#20252f 62%,#28493e);padding:16px;display:flex;flex-direction:column;justify-content:space-between}.shot:nth-child(2){background:linear-gradient(150deg,#3d3151,#20252f 62%,#4a3834)}.shot:nth-child(3){background:linear-gradient(150deg,#4b4229,#20252f 62%,#273f4b)}.phone{height:7px;width:50px;border-radius:8px;background:#ffffff80;margin:0 auto 12px}.mockLine{height:7px;background:#ffffff25;border-radius:8px;margin:8px 0}.mockLine.short{width:60%}.mockTiles{display:flex;gap:7px}.mockTiles i{display:block;height:43px;flex:1;border-radius:8px;background:#ffffff17}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px}.card p{margin:0;color:#d0d6df;font-size:14px}.tagList{display:flex;gap:8px;flex-wrap:wrap}.tag{background:var(--surface2);border:1px solid var(--line);border-radius:9px;padding:8px 11px;font-size:12px;color:#dce2ea}.safety{display:flex;gap:12px;align-items:flex-start}.safetyIcon{font-size:25px}.safety strong{display:block;margin-bottom:4px}.safety p{color:var(--muted);font-size:13px;margin:0}
+.infoRows{display:grid;gap:0}.infoRow{display:flex;justify-content:space-between;gap:18px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}.infoRow:last-child{border:0}.infoRow span:first-child{color:var(--muted)}.infoRow span:last-child{text-align:right}
+.note{margin-top:25px;padding:13px 15px;border:1px dashed #665d36;border-radius:12px;color:#e6d8a4;font-size:12px;background:#29251a}
+footer{border-top:1px solid var(--line);padding:22px;text-align:center;color:var(--muted);font-size:12px}
+/* Anime sun-glow accent */
+.appName{color:#fff8d1;text-shadow:0 0 7px #ffd40055,0 0 20px #ffb80035}
+.appIcon{animation:animeSunGlow 3s ease-in-out infinite alternate}
+@keyframes animeSunGlow{from{box-shadow:0 0 12px #ffd40022,0 10px 35px #0004}to{box-shadow:0 0 26px #ffd40077,0 0 48px #ffb80022,0 10px 35px #0004}}
+.install:hover{filter:brightness(1.06);box-shadow:0 0 25px #ffd40066}
+@media(prefers-reduced-motion:reduce){.appIcon{animation:none}}
+@media(max-width:600px){.screens{grid-template-columns:minmax(0,1fr)}.screenImage{max-height:none;max-width:100%;object-fit:contain}.topbar{height:58px;padding:0 14px}.search{max-width:46%;overflow:hidden;white-space:nowrap}main{padding:20px 14px 42px}.crumb{margin-bottom:18px}.appHead{align-items:flex-start;gap:14px}.appIcon{width:84px;height:84px;flex-basis:84px;border-radius:21px;font-size:40px}.appName{font-size:26px}.dev{font-size:13px}.headMeta{font-size:12px}.stats{padding:14px 2px}.stat strong{font-size:14px}.stat span{font-size:10px}.screens{grid-template-columns:repeat(3,minmax(150px,1fr));overflow-x:auto;padding-bottom:5px}.shot{min-height:150px;padding:12px}.section h2{font-size:18px}.card{padding:15px}.installRow{margin:20px 0}.infoRow{font-size:13px}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="logo">Anime<span> Box</span></div><div class="search">⌕ &nbsp; Search apps</div></header>
+<main>
+<div class="crumb">Apps <span>›</span> Anime Box <span>›</span> App details</div>
+<section class="appHead">
+  <img class="appIcon" src="https://cdn.imageurlgenerator.com/uploads/ce68f4a9-a8e6-42f7-9cde-64dd6467ccd1.png" alt="Anime Box app logo" loading="eager" referrerpolicy="no-referrer">
+  <div>
+    <h1 class="appName">Anime Box</h1>
+    <div class="dev">Anime &amp; Entertainment</div>
+    <div class="verified">▶ Movies · Anime · TV Shows</div>
+    <div class="headMeta">Entertainment · App download</div>
+  </div>
+</section>
+<div class="installRow"><button class="install" id="downloadBtn">↓ &nbsp; Download</button><button class="share" id="shareBtn" aria-label="Share app">↗</button></div>
+<section class="stats">
+  <div class="stat"><strong>8.1 ★</strong><span>App rating</span></div>
+  <div class="stat"><strong id="downloadCount">—</strong><span>Downloads (live)</span></div>
+  <div class="stat"><strong>Anime</strong><span>Category</span></div>
+  <div class="stat"><strong>1.0</strong><span>Version</span></div>
+  <div class="stat"><strong>19 MB</strong><span>App size</span></div>
+</section>
+<section class="section"><h2>Screenshots</h2><p class="sub">Preview the app before downloading</p>
+<div class="screens">
+  <img class="screenImage" src="https://cdn.imageurlgenerator.com/uploads/2bb566f6-bf0b-410f-999d-309624ac9f87.jpeg" alt="Anime Box screenshot 1" loading="lazy" referrerpolicy="no-referrer">
+  <img class="screenImage" src="https://cdn.imageurlgenerator.com/uploads/4c32d13a-b1e6-41c4-b518-1d2a6c2df80d.jpeg?_iug_view=internal" alt="Anime Box screenshot 2" loading="lazy" referrerpolicy="no-referrer">
+  <img class="screenImage" src="https://cdn.imageurlgenerator.com/uploads/f4720391-fbe1-46dc-907d-63c43f988772.jpeg?_iug_view=internal" alt="Anime Box screenshot 3" loading="lazy" referrerpolicy="no-referrer">
+</div></section>
+<section class="section"><h2>Preview video</h2><div class="card"><p>▶ &nbsp; Preview video will appear here when a video URL is added.</p></div></section>
+<section class="section"><h2>About this app</h2><div class="card"><p>Anime Box brings anime, movies, and TV shows together. Tap Download to download the Android APK (19 MB).</p></div></section>
+<section class="section"><h2>What's new</h2><div class="card"><p>• Anime Box app listing<br>• Live download counter connected to Firebase</p></div></section>
+<section class="section"><h2>App permissions</h2><div class="card"><div class="tagList"><span class="tag">Camera (example)</span><span class="tag">Notifications (example)</span><span class="tag">Network access (example)</span></div><p style="margin-top:12px;color:var(--muted);font-size:12px">Example only — replace with the app's actual permissions.</p></div></section>
+<section class="section"><h2>Data safety</h2><div class="card safety"><div class="safetyIcon">🛡️</div><div><strong>Data safety information</strong><p>Data collection and sharing details will be shown here after the developer provides accurate information.</p></div></div></section>
+<section class="section"><h2>Compatibility</h2><div class="card"><div class="infoRows"><div class="infoRow"><span>Platform</span><span>Android</span></div><div class="infoRow"><span>Minimum Android</span><span>To be confirmed</span></div><div class="infoRow"><span>Last updated</span><span>Oct 15, 2026</span></div><div class="infoRow"><span>Package / version</span><span>Sample · 1.2.0</span></div></div></div></section>
+<div class="note">Rating 8.1 is the rating you requested. The download counter updates in real time from Firebase and counts download-button clicks, not verified completed installs. App size: 19 MB. The download button opens the supplied APK link.</div>
+</main>
+<footer>Anime Box · App Store</footer>
+<!-- Firebase Realtime Database (compat SDK) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyBrN6IlkvwKtWRVLkdvKAO0eJJKuatC-oA",
+  authDomain: "vnbbnbv-bd42e.firebaseapp.com",
+  projectId: "vnbbnbv-bd42e",
+  storageBucket: "vnbbnbv-bd42e.firebasestorage.app",
+  messagingSenderId: "895590571772",
+  appId: "1:895590571772:web:4e22b69ec622dedc938179",
+  databaseURL: "https://vnbbnbv-bd42e-default-rtdb.firebaseio.com"
+};
+
+// APK download URL supplied by the user.
+const appDownloadUrl = "https://veloradev.site/api/storage/presigned?key=artifacts%2Fc2bc3d12-81dc-40ef-808e-81a3047ded42%2F4763433c-1ff2-4031-86e3-f638c802c94a%2FAnimebox1.apk&filename=Animebox1.apk";
+const countEl = document.getElementById("downloadCount");
+let db = null;
+try {
+  if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+  db = firebase.database();
+  db.ref("appStats/animeBox/downloads").on("value", snap => {
+    const count = Number(snap.val() || 0);
+    countEl.textContent = count.toLocaleString();
+  }, err => {
+    countEl.textContent = "—";
+    console.error("Firebase counter read failed:", err);
+  });
+} catch (err) {
+  countEl.textContent = "—";
+  console.error("Firebase setup failed:", err);
+}
+
+document.getElementById("downloadBtn").addEventListener("click", async () => {
+  if (!appDownloadUrl) {
+    alert("Vai, age script-er appDownloadUrl-e tomar real APK download link boshao. Tarpor download counter kaj korbe.");
+    return;
+  }
+  if (!db) {
+    alert("Download counter connect hoyni. Firebase Realtime Database URL and Rules check koro.");
+    return;
+  }
+  try {
+    // Counts download-button clicks/attempts, not confirmed completed installs.
+    await db.ref("appStats/animeBox/downloads").transaction(current => (Number(current) || 0) + 1);
+    window.location.href = appDownloadUrl;
+  } catch (err) {
+    console.error(err);
+    alert("Download count update hoyni. Firebase Realtime Database Rules check koro.");
+  }
+});
+
+document.getElementById("shareBtn").addEventListener("click", async () => {
+  try {
+    if (navigator.share) await navigator.share({title:"Anime Box", text:"Anime Box app download", url:location.href});
+    else if (navigator.clipboard) { await navigator.clipboard.writeText(location.href); alert("Page link copied!"); }
+    else alert("Browser address bar theke page URL copy koro.");
+  } catch (e) {}
+});
+</script>
+</body>
+</html>
